@@ -5,6 +5,7 @@ WriteMakefile
   'NAME' => 'Statistics::Autocorrelation',
   'VERSION_FROM' => 'lib/Statistics/Autocorrelation.pm',
   'PREREQ_PM' => {
+                   'Statistics::Lite' => '3.0',
                    'Test::More' => 0
                  },
   'INSTALLDIRS' => 'site',

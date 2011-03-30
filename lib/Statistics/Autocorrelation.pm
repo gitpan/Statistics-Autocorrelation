@@ -3,7 +3,7 @@ package Statistics::Autocorrelation;
 use warnings;
 use strict;
 use Carp 'croak';
-use Statistics::Lite qw(mean variance);
+use Statistics::Lite 'mean';
 
 =head1 NAME
 
@@ -11,19 +11,17 @@ Statistics-Autocorrelation - Coefficients for any lag
 
 =head1 VERSION
 
-Version 0.01
+Version 0.02
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 =head1 SYNOPSIS
 
-Statistics-Autocorrelation - Coefficients for any lag
-
-    use Statistics::Autocorrelation;
-    $acorr = Statistics::Autocorrelation->new();
-    $coeff = $acorr->coefficient(data => \@data, lag => integer (from 1 to N-1), exact => 0, simple => 1);
+ use Statistics::Autocorrelation;
+ $acorr = Statistics::Autocorrelation->new();
+ $coeff = $acorr->coefficient(data => \@data, lag => integer (from 1 to N-1), exact => 0, simple => 1);
 
 =head1 DESCRIPTION
 
@@ -35,7 +33,7 @@ Calculates autocorrelation coefficients for a single series of numerical data, f
 
  $acorr = Statistics::Autocorrelation->new();
 
-Return a new module object for accessing its methods.
+Return a new class object for accessing its methods.
 
 =cut
 
@@ -51,7 +49,9 @@ sub new {
 
  $autocorr->coefficient(data => \@data, lag => integer (from 1 to N-1), exact => 0|1, simple => 1|0);
 
-Corporate stats programs (e.g., SPSS/PASW), and examples of autocorrelation on the web (e.g., L<http://www.itl.nist.gov/div898/handbook/eda/section3/eda35c.htm|itl.nist.gov>), often yield/demonstrate a value of the autocorrelation coefficient that assumes that the underlying series is stationary (has no linear or curvilinear trend, no periodicity), and so can be calculated as the population autocorrelation coefficient, the ratio of the autocovariance to the overall variance. To be a valid estimate of the sample autocorrelation coefficient, it is assumed that the number of observations, I<N>, in the sample is "reasonably large" - so that all the observations in each summation in the numerator are taken relative to the mean of the whole series, rather than the exact value at lag I<k>, and also that the variance used in the denominator can be that of the whole series - instead of using completely pairwise products, i.e., making the coefficient dependent on the values of I<u1>, ..., I<un-k>, and I<ui+k>, ..., I<un> at each summation. Additionally, these sources also commonly drop the factor I<I>/(I<N> - 1), assuming that the value is close enough to 1 for large I<N>.
+I<Alias>: C<coeff>
+
+Corporate stats programs (e.g., SPSS/PASW), and examples of autocorrelation on the web (e.g., L<http://www.itl.nist.gov/div898/handbook/eda/section3/eda35c.htm>), often yield/demonstrate a value of the autocorrelation coefficient that assumes that the underlying series is stationary (has no linear or curvilinear trend, no periodicity), and so can be calculated as the population autocorrelation coefficient, the ratio of the autocovariance to the overall variance. To be a valid estimate of the sample autocorrelation coefficient, it is assumed that the number of observations, I<N>, in the sample is "reasonably large" - so that all the observations in each summation in the numerator are taken relative to the mean of the whole series, rather than the exact value at lag I<k>, and also that the variance used in the denominator can be that of the whole series - instead of using completely pairwise products, i.e., making the coefficient dependent on the values of I<u1>, ..., I<un-k>, and I<ui+k>, ..., I<un> at each summation. Additionally, these sources also commonly drop the factor I<I>/(I<N> - 1), assuming that the value is close enough to 1 for large I<N>.
 
 By default, then, this method returns an estimate of the population autocorrelation coefficient, and the divisor factors are dropped; i.e., the default values of the options C<exact> = 0, and C<simple> = 1. The default value returned from this method, then, is equivalent to those returned from such corporate software, and demonstrated via such URLs, as cited; and this is also the default form of calculating the coefficient as used in texts such as Chatfield (1975). If you want, however, to keep these divisors, you need to specify C<simple> = 0; and if you want, furthermore, the exact sample autocorrelation coefficient, then specify C<exact> = 1; then you get the coefficient as calculated by Kendall's (1973) Eq. 3.35.
 
@@ -90,7 +90,7 @@ sub coefficient {
 	}
 	return $rk;
 }
-
+*coeff = \&coefficient; 
 # Kendall's (1973) Eq. 3.35., p. 40
 
 sub _calc_exact {
@@ -199,8 +199,8 @@ Roderick Garton, C<< <rgarton at cpan.org> >>
 
 =head1 BUGS
 
-Please report any bugs or feature requests to C<bug-statistics-autocorrelation-0.01 at rt.cpan.org>, or through
-the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Statistics-Autocorrelation-0.01>.  I will be notified, and then you'll
+Please report any bugs or feature requests to C<bug-statistics-autocorrelation-0.02 at rt.cpan.org>, or through
+the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Statistics-Autocorrelation-0.02>.  I will be notified, and then you'll
 automatically be notified of progress on your bug as I make changes.
 
 =head1 SUPPORT
@@ -216,19 +216,19 @@ You can also look for information at:
 
 =item * RT: CPAN's request tracker
 
-L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Statistics-Autocorrelation-0.01>
+L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Statistics-Autocorrelation-0.02>
 
 =item * AnnoCPAN: Annotated CPAN documentation
 
-L<http://annocpan.org/dist/Statistics-Autocorrelation-0.01>
+L<http://annocpan.org/dist/Statistics-Autocorrelation-0.02>
 
 =item * CPAN Ratings
 
-L<http://cpanratings.perl.org/d/Statistics-Autocorrelation-0.01>
+L<http://cpanratings.perl.org/d/Statistics-Autocorrelation-0.02>
 
 =item * Search CPAN
 
-L<http://search.cpan.org/dist/Statistics-Autocorrelation-0.01/>
+L<http://search.cpan.org/dist/Statistics-Autocorrelation-0.02/>
 
 =back
 

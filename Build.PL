@@ -9,8 +9,9 @@ my $builder = Module::Build->new(
     dist_version_from   => 'lib/Statistics/Autocorrelation.pm',
     build_requires => {
         'Test::More' => 0,
+        'Statistics::Lite' => '3.0',
     },
-    add_to_cleanup      => [ 'Statistics-Autocorrelation-0.01-*' ],
+    add_to_cleanup      => [ 'Statistics-Autocorrelation-0.02-*' ],
     create_makefile_pl => 'traditional',
 );
 

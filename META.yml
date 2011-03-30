@@ -3,6 +3,7 @@ abstract: 'Coefficients for any lag'
 author:
   - 'Roderick Garton <rgarton@cpan.org>'
 build_requires:
+  Statistics::Lite: 3.0
   Test::More: 0
 configure_requires:
   Module::Build: 0.36
@@ -15,7 +16,7 @@ name: Statistics-Autocorrelation
 provides:
   Statistics::Autocorrelation:
     file: lib/Statistics/Autocorrelation.pm
-    version: 0.01
+    version: 0.02
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.01
+version: 0.02

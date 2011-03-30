@@ -1,7 +1,7 @@
-<SOFTPKG NAME="Statistics-Autocorrelation" VERSION="0.01">
+<SOFTPKG NAME="Statistics-Autocorrelation" VERSION="0.02">
     <ABSTRACT>Coefficients for any lag</ABSTRACT>
     <AUTHOR>Roderick Garton</AUTHOR>
     <IMPLEMENTATION>
-        <CODEBASE HREF="PPM-Statistics-Autocorrelation-0.01.tar.gz" />
+        <CODEBASE HREF="PPM-Statistics-Autocorrelation-0.02.tar.gz" />
     </IMPLEMENTATION>
 </SOFTPKG>
